@@ -1,13 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel, InjectConnection } from '@nestjs/mongoose';
 import { NotFoundException } from '@nestjs/common/exceptions';
+import { Connection, Model } from 'mongoose';
 import { ERRORS } from './books.constants';
+import { Books, BooksDocument } from './books.schema';
 import { IBookDTO } from './dto/i-book.dto';
 import { libraryDB } from './mock-libraryDB';
 
 @Injectable()
 export class BooksService {
+    constructor(
+        @InjectModel(Books.name) private BooksModel: Model<BooksDocument>,
+        @InjectConnection() private connection: Connection,
+    ) {}
+
     getBooks() {
-        return libraryDB.books;
+        return this.BooksModel.find().exec();
     }
 
     getBook(id: string) {
@@ -22,7 +30,7 @@ export class BooksService {
         return this.getBook(id);
     }
 
-    update(id: string, dto: IBookDTO) {
+    update(id: string, dto: Partial<IBookDTO>) {
         const book = libraryDB.books.findIndex((book) => book.id === id);
 
         if (book > -1) {
