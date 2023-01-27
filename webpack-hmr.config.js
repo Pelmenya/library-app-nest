@@ -9,7 +9,7 @@ module.exports = function (options, webpack) {
         watchOptions: {
             // без этого не успевает в Docker Hot Module Reload!!!
             aggregateTimeout: 300,
-            poll: 1000,
+            poll: 500,
         },
         externals: [
             nodeExternals({
