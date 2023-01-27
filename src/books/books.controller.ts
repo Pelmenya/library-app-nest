@@ -8,8 +8,10 @@ import {
     Post,
     Put,
 } from '@nestjs/common';
+import { IdValidationPipe } from 'src/pipes/id-validation/id-validation.pipe';
 import { ERRORS } from './books.constants';
 import { BooksService } from './books.service';
+import { CreateBookDTO } from './dto/book.dto';
 import { IBookDTO } from './dto/i-book.dto';
 
 @Controller('books')
@@ -22,7 +24,7 @@ export class BooksController {
     }
 
     @Get(':id')
-    async getBook(@Param('id') id: string) {
+    async getBook(@Param('id', IdValidationPipe) id: string) {
         try {
             const book = await this.booksService.getBook(id);
             if (!book) {
@@ -35,12 +37,12 @@ export class BooksController {
     }
 
     @Post()
-    async create(@Body() dto: Omit<IBookDTO, 'id'>) {
+    async create(@Body() dto: CreateBookDTO) {
         return await this.booksService.create(dto);
     }
 
     @Delete(':id')
-    async delete(@Param('id') id: string) {
+    async delete(@Param('id', IdValidationPipe) id: string) {
         try {
             const book = await this.booksService.delete(id);
             if (!book) {
@@ -53,7 +55,10 @@ export class BooksController {
     }
 
     @Put(':id')
-    async update(@Param('id') id: string, @Body() dto: Partial<IBookDTO>) {
+    async update(
+        @Param('id', IdValidationPipe) id: string,
+        @Body() dto: Partial<IBookDTO>,
+    ) {
         try {
             const book = await this.booksService.update(id, dto);
             if (!book) {

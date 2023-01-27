@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel, InjectConnection } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 import { Books, BooksDocument } from './books.schema';
+import { CreateBookDTO } from './dto/book.dto';
 import { IBookDTO } from './dto/i-book.dto';
 
 @Injectable()
@@ -19,7 +20,7 @@ export class BooksService {
         return this.BooksModel.findById(id);
     }
 
-    async create(dto: Omit<IBookDTO, 'id'>) {
+    async create(dto: CreateBookDTO) {
         return this.BooksModel.create(dto);
     }
 
