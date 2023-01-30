@@ -11,6 +11,9 @@ export class Users {
 
     @Prop({ required: true })
     public firstName: string;
+
+    @Prop()
+    public lastName: string;
 }
 
 export type UsersDocument = Users & Document;
