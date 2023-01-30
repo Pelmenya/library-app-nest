@@ -25,7 +25,7 @@ export class UsersService {
         }
     }
 
-    async find(dto: SignInDto) {
+    async findUser(dto: SignInDto) {
         try {
             const user = await this.UsersModel.findOne({ email: dto.email });
             if (!user) {

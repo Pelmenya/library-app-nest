@@ -1,4 +1,4 @@
 export const ERRORS = {
     NOT_CREATE_USER: 'Не удалось создать пользователя',
-    BAD_EMAIL_OR_PASSWORD: 'Неправильный логин или пароль',
+    BAD_EMAIL_OR_PASSWORD: 'Неправильный email или пароль',
 };

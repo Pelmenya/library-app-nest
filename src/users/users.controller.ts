@@ -14,8 +14,8 @@ export class UsersController {
     @HttpCode(200)
     @Post('signin')
     async signin(@Body() dto: SignInDto) {
-        const user = await this.authService.validate(dto);
-        return user;
+        const token = await this.authService.signin(dto);
+        return token;
     }
 
     @Post('signup')
