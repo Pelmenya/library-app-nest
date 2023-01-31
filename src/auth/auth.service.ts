@@ -14,7 +14,14 @@ export class AuthService {
     async signin(dto: SignInDto) {
         const user = await this.usersService.findUser(dto);
         const { email, firstName, _id: id } = user;
-        return this.jwtService.signAsync({ email, firstName, id });
+        const access_token = await this.jwtService.signAsync({
+            email,
+            firstName,
+            id,
+        });
+        return {
+            access_token,
+        };
     }
 
     async signup(dto: SignUpDto) {
