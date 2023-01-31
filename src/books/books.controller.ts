@@ -7,7 +7,9 @@ import {
     Param,
     Post,
     Put,
+    UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/auth.jwt.guard';
 import { IdValidationPipe } from 'src/pipes/id-validation/id-validation.pipe';
 import { ERRORS } from './books.constants';
 import { BooksService } from './books.service';
@@ -36,11 +38,13 @@ export class BooksController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post()
     async create(@Body() dto: CreateBookDTO) {
         return await this.booksService.create(dto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete(':id')
     async delete(@Param('id', IdValidationPipe) id: string) {
         try {
@@ -54,6 +58,7 @@ export class BooksController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put(':id')
     async update(
         @Param('id', IdValidationPipe) id: string,
