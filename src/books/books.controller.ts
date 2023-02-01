@@ -9,8 +9,8 @@ import {
     Put,
     UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/auth.jwt.guard';
-import { IdValidationPipe } from 'src/pipes/id-validation/id-validation.pipe';
+import { JwtAuthGuard } from '../auth/auth.jwt.guard';
+import { IdValidationPipe } from '../pipes/id-validation/id-validation.pipe';
 import { ERRORS } from './books.constants';
 import { BooksService } from './books.service';
 import { CreateBookDTO } from './dto/book.dto';

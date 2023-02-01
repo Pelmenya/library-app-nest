@@ -9,7 +9,6 @@ import { IBookDTO } from './dto/i-book.dto';
 export class BooksService {
     constructor(
         @InjectModel(Books.name) private BooksModel: Model<BooksDocument>,
-        @InjectConnection() private connection: Connection,
     ) {}
 
     async getBooks() {
@@ -17,7 +16,7 @@ export class BooksService {
     }
 
     async getBook(id: string) {
-        return this.BooksModel.findById(id);
+        return this.BooksModel.findById(id).exec();
     }
 
     async create(dto: CreateBookDTO) {
