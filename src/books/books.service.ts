@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel, InjectConnection } from '@nestjs/mongoose';
-import { Connection, Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Books, BooksDocument } from './books.schema';
 import { CreateBookDTO } from './dto/book.dto';
 import { IBookDTO } from './dto/i-book.dto';
